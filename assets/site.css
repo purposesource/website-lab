@@ -425,7 +425,7 @@ strong { font-weight: 600; }
   min-height: 40px;
   padding: 0 14px;
   border: 1px solid var(--control-border);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--bg);
   color: var(--ink);
   font: 500 var(--fs-ui)/1 var(--font-sans);
@@ -749,8 +749,8 @@ strong { font-weight: 600; }
 }
 .theme-switch button:hover { background: var(--tint); }
 .theme-switch button + button { border-left-width: 0; }
-.theme-switch button:first-of-type { border-radius: 999px 0 0 999px; }
-.theme-switch button:last-of-type { border-radius: 0 999px 999px 0; }
+.theme-switch button:first-of-type { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.theme-switch button:last-of-type { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
 .theme-switch button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
 @media (max-width: 999px) {
@@ -1341,7 +1341,7 @@ details.more > div > :last-child { margin-bottom: 0; }
   min-height: 44px;
   padding: 0 14px;
   border: 1px solid var(--control-border);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--surface);
 }
 .search .icon { width: 18px; height: 18px; color: var(--ink-faint); }
