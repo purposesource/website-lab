@@ -107,12 +107,12 @@ source page, licence and what we changed.
 - **Licences allowed:** CC0 or public domain, CC BY (any version), the Unsplash License, the
   Pexels License. Never NC or ND. CC BY-SA only if nothing else fits, and then the credits say
   that the cropped copy is shared under the same licence.
-- **What a photograph may show:** calm, natural light, warm or neutral tones; backs, hands or
-  a group at a distance rather than an identifiable face; no brand logo (on the home photograph
+- **What a photograph may show:** calm, natural light, warm or neutral tones; backs, hands, or
+  people seen from the side or at a distance, never a face close up; no brand logo (on the home photograph
   the event's name and logos on a projected slide are blurred); nothing that suggests a named
   person speaks for Purpose Source; no stock clichés. Never text over a photograph.
 - **The files:** `assets/photos/<name>-<width>.webp`, two widths each: 1600 and 800 px for the
-  home photograph (2:1; from 761 px wide it shows at 12:5, a little trimmed top and bottom),
+  home photograph (1600 x 650, cut below the library's clock; 2:1 on phones, 12:5 from 761 px),
   1000 and 500 px for the others (4:3). WebP at quality 78, colours in sRGB, every bit of
   metadata removed (EXIF, GPS, XMP, colour profiles). The folder holds about 0.6 MB; keep it
   under about 1.6 MB.

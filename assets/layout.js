@@ -218,7 +218,7 @@
     ],
     lines: [
       'The Purpose Source License is source-available; it is not OSI-approved.',
-      'No cookies while you browse. No analytics. Code Apache-2.0; narrative pages CC BY-ND 4.0.'
+      'No cookies while you browse. No analytics. Code Apache-2.0; narrative pages CC BY-ND 4.0; photographs under their own licences (Photo credits).'
     ]
   };
 

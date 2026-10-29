@@ -1274,10 +1274,11 @@ details.more > div > :last-child { margin-bottom: 0; }
 .home-verdict { margin: 0 0 18px; max-width: 32em; color: var(--ink-muted); font-size: var(--fs-summary); line-height: 1.55; }
 
 /* The opening photograph: wide, between the title and the three doors, on phones too. The file
-   is 2:1; from 761 px it shows at 12:5 (a little trimmed top and bottom) so the doors stay
-   close. It is in the first screen, so the page loads it at once. */
+   is cut just below the library's clock (1600 x 650); it shows at 2:1 on phones (its sides a
+   little trimmed) and at 12:5 from 761 px, so the doors stay close. It is in the first screen,
+   so the page loads it at once. */
 .home-photo { margin: 40px 0 0; }
-.home-photo img { aspect-ratio: 2 / 1; object-fit: cover; object-position: 50% 55%; }
+.home-photo img { aspect-ratio: 2 / 1; object-fit: cover; object-position: 50% 50%; }
 @media (min-width: 761px) {
   .home-photo img { aspect-ratio: 12 / 5; }
 }
