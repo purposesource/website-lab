@@ -75,6 +75,8 @@ are brief stand-ins.
   in a row go in `<div class="acc-group">`. A short faint note at the right of the title is
   `<span class="acc-note">`. Give the `<details>` an `id` if a link should open it.
 - **A sage band behind a section:** add `band` to its `class` (`<section class="sec band">`).
+- **A short link with an icon, followed by punctuation** (`(Art. 5↗).`): put the link and the
+  punctuation in `<span class="nobr">…</span>`, or a line may start with `).` on its own.
 
 ### Adding a page
 
