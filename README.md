@@ -33,7 +33,7 @@ assets/site.css               the only stylesheet; design tokens at the top
 assets/layout.js              the header menu and the footer, defined once; theme switch;
                               copy icons; the "Why this page" panel
 assets/registry.js            search, filters and sorting on registry.html only
-assets/fonts/                 Inter, Source Serif 4, JetBrains Mono (woff2) and their OFL licences
+assets/fonts/                 Source Serif 4 and Inter (woff2) and their OFL licences
 assets/brand/                 the Purpose Source mark (light and dark) and the favicon
 robots.txt, .nojekyll         keep crawlers out; tell GitHub Pages to serve files as they are
 ```

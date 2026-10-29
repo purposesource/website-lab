@@ -13,7 +13,10 @@
  * "All pages" (learn.html) links every page.
  *
  * The script also runs: the theme switch (footer), the copy icons, Esc and click-outside for
- * the "Why this page" panel, the "Improve this page" link, and the not-found page's suggestion.
+ * the "Why this page" panel, the "Improve this page" link, the not-found page's suggestion,
+ * accordions that open when an address points at them (license.html#files), and the gentle
+ * rise of sections into view as you scroll (never with reduced motion; without the script
+ * nothing is hidden). Page-to-page transitions and smooth scrolling are plain CSS.
  * Plain JavaScript, no libraries, no network requests, nothing stored except the theme choice.
  */
 (function () {
@@ -586,6 +589,60 @@
     }
   }
 
+  /* ---------------------------------------------------------------- accordions */
+  /* An address that points at an accordion, or at something inside one, opens it: the menu's
+     "Files and identifiers" (license.html#files) lands on open content. Without the script the
+     browser still lands on the accordion's title, one click from its content. */
+  function openTarget(id) {
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (el.tagName === 'DETAILS') el.open = true;
+    for (var p = el.parentElement; p; p = p.parentElement) {
+      if (p.tagName === 'DETAILS' && !p.open) p.open = true;
+    }
+  }
+
+  function hashId(hash) {
+    try { return decodeURIComponent((hash || '').slice(1)); } catch (e) { return ''; }
+  }
+
+  function wireTargets() {
+    openTarget(hashId(location.hash));
+    window.addEventListener('hashchange', function () { openTarget(hashId(location.hash)); });
+    /* A second click on the same link changes no hash, so links are watched too. */
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href*="#"]') : null;
+      if (!a || !a.hash) return;
+      if (a.pathname === location.pathname && a.protocol === location.protocol) openTarget(hashId(a.hash));
+    });
+  }
+
+  /* ---------------------------------------------------------------- sections rising into view */
+  /* Sections that start below the first screen fade and rise a little as they come into view.
+     Only this script hides them, and only until they are reached: with JavaScript off, with
+     reduced motion, or when printing, every section is simply there. */
+  function wireReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var fold = window.innerHeight || document.documentElement.clientHeight;
+    var pending = Array.prototype.filter.call(
+      document.querySelectorAll('.content > .sec, .content > .reveal'),
+      function (el) { return el.getBoundingClientRect().top > fold; });
+    if (!pending.length) return;
+    function show(el) {
+      el.classList.add('reveal-in');
+      el.classList.remove('reveal-pending');
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { show(entry.target); observer.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px' });
+    pending.forEach(function (el) { el.classList.add('reveal-pending'); observer.observe(el); });
+    window.addEventListener('beforeprint', function () { pending.forEach(show); observer.disconnect(); });
+  }
+
   function ready() {
     drawHeader();
     drawFooter();
@@ -593,6 +650,8 @@
     wireWhyPanel();
     addImproveLink();
     suggestForNotFound();
+    wireTargets();
+    wireReveal();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
