@@ -178,6 +178,7 @@ a {
   text-decoration-thickness: 1px;
   text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
   text-underline-offset: 4px;
+  transition: color var(--motion) ease, text-decoration-color var(--motion) ease;
 }
 a:hover { color: var(--accent-hover); text-decoration-color: currentColor; }
 
@@ -1464,6 +1465,10 @@ details.more > div > :last-child { margin-bottom: 0; }
   .title-block, .home-title { view-transition-name: title-block; }
   ::view-transition-old(root) { animation: 160ms ease both ps-fade-out; }
   ::view-transition-new(root) { animation: 260ms var(--ease) both ps-fade-in; }
+  /* The named parts never travel: leaving a page that is scrolled down, the banner would
+     otherwise slide in from far above and the header drop by the banner's height. */
+  ::view-transition-group(site-header),
+  ::view-transition-group(proto-banner),
   ::view-transition-group(title-block) { animation-duration: 0s; }
   ::view-transition-old(title-block) { animation: 140ms ease both ps-fade-out; }
   ::view-transition-new(title-block) { animation: 320ms var(--ease) both ps-rise-in; }
@@ -1483,7 +1488,7 @@ details.more > div > :last-child { margin-bottom: 0; }
     block-size: 0;
     overflow-y: clip;
     overflow-clip-margin: 8px;
-    transition: block-size 260ms var(--ease), content-visibility 260ms allow-discrete;
+    transition: block-size 240ms var(--ease), content-visibility 240ms allow-discrete;
   }
   details.more[open]::details-content { block-size: auto; }
 }
@@ -1498,7 +1503,11 @@ details.more > div > :last-child { margin-bottom: 0; }
     scroll-behavior: auto !important;
   }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
-  .doors li:hover, .go:hover .icon, .doors li:hover a .icon { transform: none; }
+  /* Nothing shifts, lifts, nudges or shrinks on hover or press either. */
+  .doors li:hover, .go:hover .icon, .doors li:hover a .icon,
+  .panel-featured:hover .panel-featured-title .icon,
+  .button:active, .copy:active, .why summary:active, .menu-button:active, .close-button:active,
+  .answers a:active { transform: none; }
 }
 
 /* Print: the document only, every section visible, accordions as they are. */

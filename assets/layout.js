@@ -641,6 +641,11 @@
     }, { rootMargin: '0px 0px -6% 0px' });
     pending.forEach(function (el) { el.classList.add('reveal-pending'); observer.observe(el); });
     window.addEventListener('beforeprint', function () { pending.forEach(show); observer.disconnect(); });
+    /* Keyboard focus never lands on a faded section: Tab into one and it is simply there. */
+    document.addEventListener('focusin', function (e) {
+      var el = e.target && e.target.closest ? e.target.closest('.reveal-pending') : null;
+      if (el) { el.classList.remove('reveal-pending'); observer.unobserve(el); }
+    });
   }
 
   function ready() {
