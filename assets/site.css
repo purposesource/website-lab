@@ -590,6 +590,7 @@ strong { font-weight: 600; }
   column-gap: 56px;
   align-items: center;
 }
+.title-text { min-width: 0; }
 .title-ill { margin: 0; justify-self: end; width: 100%; }
 .title-ill svg { display: block; width: 100%; height: auto; }
 @media (max-width: 860px) {
@@ -613,6 +614,23 @@ strong { font-weight: 600; }
 }
 .doc-header p { margin: 0; }
 .doc-header .ident { font-size: 13px; }
+.doc-more { margin-top: 4px; }
+.doc-more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--accent);
+  font-weight: 500;
+  border-radius: 6px;
+}
+.doc-more > summary::-webkit-details-marker { display: none; }
+.doc-more > summary .chev { width: 16px; height: 16px; transition: transform var(--motion) var(--ease); }
+.doc-more > summary:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 4px; }
+.doc-more[open] > summary .chev { transform: rotate(180deg); }
+.doc-more > p { margin: 2px 0 4px; }
 
 /* Content: text keeps the reading width; tables and directories may use the wide width. */
 .content { padding-bottom: 8px; }
@@ -649,6 +667,7 @@ strong { font-weight: 600; }
   background-image: var(--grain);
 }
 .band + .sec, .band + .page-end { border-top: 0; }
+.band .notice:not(.notice--seal) { background: var(--bg); }
 .band + .sec { padding-top: 0; }
 .content > .band:last-child { margin-bottom: 0; }
 
@@ -1091,6 +1110,7 @@ details.more > summary .chev {
 details.more[open] > summary .chev { transform: rotate(180deg); }
 details.more > summary .acc-note { margin-left: auto; padding-left: 12px; color: var(--ink-faint); font-size: var(--fs-small); font-weight: 400; text-align: right; }
 details.more > div { padding: 6px 20px 20px; }
+details.more > div > :first-child { margin-top: 0; }
 details.more > div > :last-child { margin-bottom: 0; }
 .acc-group > details.more { margin: 0; }
 .acc-group > details.more + details.more { margin-top: 12px; }
@@ -1131,7 +1151,12 @@ details.more > div > :last-child { margin-bottom: 0; }
   font: 400 16px/1.65 var(--font-serif);
   color: var(--ink);
 }
-.framed details.more { margin: 14px 0 0; }
+.framed details.more { margin: 16px 0 0; border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; }
+.framed details.more > summary { padding-inline: 0; border-radius: 0; min-height: 48px; }
+.framed details.more > summary:hover { background: none; }
+.framed details.more > div { padding: 2px 0 2px; }
+.framed-body > details.more:first-child { margin-top: 0; border-top: 0; }
+.facts details.more { margin: 12px 0 2px; }
 
 /* Columns of short text (two or three across, one on phones). */
 .cols { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 0; margin: var(--s5) 0; border-top: 1px solid var(--rule); }
@@ -1180,10 +1205,10 @@ details.more > div > :last-child { margin-bottom: 0; }
   align-items: center;
 }
 .sec-ill > * { grid-column: 1; }
-.sec-ill > .ill { grid-column: 2; grid-row: 1 / span 20; align-self: center; }
+.sec-ill > .ill { grid-column: 2; grid-row: 1 / span 20; align-self: start; margin-top: 8px; }
 @media (max-width: 860px) {
   .sec-ill { display: block; }
-  .sec-ill > .ill { max-width: 240px; margin: 4px 0 24px; }
+  .sec-ill > .ill { max-width: 230px; margin: 0 0 20px; }
 }
 
 /* ------------------------------------------------------------------ 7. Page-specific */
@@ -1268,6 +1293,7 @@ details.more > div > :last-child { margin-bottom: 0; }
 /* Licence: the "at a glance" table. */
 .glance th[scope="row"] { width: 26%; font-weight: 600; }
 .glance td .sec-ref { display: block; margin-top: 2px; font-size: var(--fs-small); color: var(--ink-faint); }
+@media (max-width: 700px) { .glance th[scope="row"] { width: auto; } }
 
 /* The decision tree ("Do I need to pay?"): the section you jumped to is highlighted. */
 .q { padding: 20px 0 14px; border-top: 1px solid var(--rule); }
