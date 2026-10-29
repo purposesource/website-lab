@@ -94,7 +94,7 @@ The operator asked for a calmer, warmer prototype, in six points. How each one i
 1. **Air out the space**: generous room between blocks of text, images and sections, so the
    page rests and feels less loaded. Sections are 72 px apart with 40 px from their hairline to
    the heading (48 and 28 px on phones); side margins are 40 px from 1100 px wide (20 px on
-   phones); text keeps a reading column of 660 px, about 70 characters of the serif; paragraphs
+   phones); text keeps a reading column of 600 px, about 70 characters of the serif; paragraphs
    are 20 px apart; the title block, the menu panels and the footer got more room too. Calm,
    not empty: no giant hero and no spacer bands.
 2. **Friendly typography, at most two families**: Source Serif 4, a classic warm serif, for

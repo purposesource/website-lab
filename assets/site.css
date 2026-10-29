@@ -87,7 +87,7 @@
   /* Sizes. */
   --frame: 1240px;     /* the page frame, gutters included */
   --gutter: 32px;
-  --reading: 660px;    /* about 70 characters of the serif at 18px */
+  --reading: 600px;    /* about 70 characters of the serif at 18px */
   --wide: 1100px;      /* tables and the registry */
   --header-h: 64px;
   --radius: 12px;      /* cards, notices, accordions, record boxes */
