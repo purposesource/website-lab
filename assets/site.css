@@ -1245,8 +1245,10 @@ details.more > div > :last-child { margin-bottom: 0; }
 /* Photographs: real scenes where one helps more than a drawing, in two widths each (srcset).
    Width and height reserve the space, so nothing moves while they load. Soft corners, a faint
    inner edge, a little dimmer in dark mode; never text over a photograph. Sources, authors and
-   licences: credits.html. */
-.photo { margin: 0; }
+   licences: credits.html. The margin reset is wrapped in :where(), which gives it no weight, so
+   the title block (section 5), home and credits rules set a photograph's spacing even where
+   they come earlier in this file. */
+:where(.photo) { margin: 0; }
 .photo img {
   display: block;
   width: 100%;
