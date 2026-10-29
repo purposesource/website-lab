@@ -205,12 +205,13 @@ ul, ol { margin: 0 0 20px; padding-left: 1.25em; }
 li { margin: 0 0 var(--s2); }
 li > ul, li > ol { margin: var(--s2) 0 0; }
 
-/* Identifiers, hashes, file names: Inter with tabular figures and a little letter-spacing. */
+/* Identifiers, hashes, file names: Inter with tabular figures and a little letter-spacing.
+   (No slashed zero: the Inter files in assets/fonts do not carry that feature.) */
 code, kbd, .ident {
   font-family: var(--font-sans);
   font-size: 0.84em;
   font-weight: 500;
-  font-variant-numeric: tabular-nums slashed-zero;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
 }
 code { background: var(--surface-subtle); padding: 2px 6px; border-radius: 6px; }
@@ -1359,7 +1360,7 @@ details.more > div > :last-child { margin-bottom: 0; }
 .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 .filter-label { font: 400 var(--fs-small)/1.4 var(--font-sans); color: var(--ink-faint); min-width: 4.5em; }
 .dir-count { font: 400 var(--fs-small)/1.5 var(--font-sans); color: var(--ink-muted); margin: 6px 0 0; }
-.dir-table .repo { font-weight: 500; font-variant-numeric: tabular-nums slashed-zero; letter-spacing: 0.02em; overflow-wrap: anywhere; }
+.dir-table .repo { font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; overflow-wrap: anywhere; }
 .dir-table .repo-line { display: block; margin-top: 2px; font-size: 14px; color: var(--ink-muted); font-weight: 400; letter-spacing: 0; }
 .dir-table .chips { display: flex; flex-wrap: wrap; gap: 4px 6px; }
 .dir-table td.view { white-space: nowrap; }
