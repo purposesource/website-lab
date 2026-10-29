@@ -216,6 +216,9 @@ code, kbd, .ident {
 }
 code { background: var(--surface-subtle); padding: 2px 6px; border-radius: 6px; }
 .ident-wrap { overflow-wrap: anywhere; word-break: break-word; }
+/* A short link with an icon, kept on one line with the punctuation that follows it: browsers
+   may wrap after any inline icon, which would leave ")." alone at the start of a line. */
+.nobr { white-space: nowrap; }
 
 blockquote { margin: var(--s5) 0; }
 hr { border: 0; border-top: 1px solid var(--rule); margin: var(--s7) 0; }
