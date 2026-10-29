@@ -55,7 +55,9 @@ are brief stand-ins.
 
 - **Colours, type sizes, spacing, widths:** the top of `assets/site.css`. Each colour is one line
   with its light and dark value side by side: `light-dark(#3d6a47, #9fc5a7)`. The drawings'
-  colours are the `--ill-*` tokens; the paper grain is `--grain`.
+  colours are the `--ill-*` tokens; the paper grain is `--grain` (its dark value is written twice,
+  for the theme switch and for the system setting). The grain's strength is set by contrast: a
+  stronger one takes the faint captions on a band below 4.5:1 (see **Contrast, measured**).
 - **Motion:** section 8 of `assets/site.css` (page transitions, the rise into view, menus and
   accordions) and `wireReveal` in `assets/layout.js`. Everything there is switched off for
   visitors who ask for reduced motion.
@@ -93,15 +95,16 @@ The operator asked for a calmer, warmer prototype, in six points. How each one i
 
 1. **Air out the space**: generous room between blocks of text, images and sections, so the
    page rests and feels less loaded. Sections are 72 px apart with 40 px from their hairline to
-   the heading (48 and 28 px on phones); side margins are 40 px from 1100 px wide (20 px on
-   phones); text keeps a reading column of 600 px, about 70 characters of the serif; paragraphs
-   are 20 px apart; the title block, the menu panels and the footer got more room too. Calm,
-   not empty: no giant hero and no spacer bands.
+   the heading (48 and 28 px on phones); side margins are 40 px from 1100 px wide (32 px below
+   that, 20 px on phones); text keeps a reading column of 600 px, about 70 characters of the
+   serif; paragraphs are 20 px apart; the title block, the menu panels and the footer got more
+   room too. Calm, not empty: no giant hero and no spacer bands.
 2. **Friendly typography, at most two families**: Source Serif 4, a classic warm serif, for
    headings and running text; Inter only for small interface text (the menu, buttons, labels,
    metadata lines, breadcrumbs, captions, tables and the footer). JetBrains Mono is gone, with
-   its font file and licence; identifiers and hashes are set in Inter with tabular figures, a
-   slashed zero and a little letter-spacing (the class `ident`).
+   its font file and licence; identifiers and hashes are set in Inter with tabular figures and
+   a little letter-spacing (the class `ident`). (No slashed zero: the Inter files here do not
+   carry that feature.)
 3. **Humanise the images**: no photographs (we have none of our own, and stock photos of
    strangers would not be us). Instead, hand-drawn-style drawings in the manner of the live
    site's home drawing (a soft wash, the green line, leaf and clay fills, faces as plain
@@ -110,9 +113,10 @@ The operator asked for a calmer, warmer prototype, in six points. How each one i
    step boxes of "How the money flows" on the home page and sit beside the title blocks of the
    main pages; "The path of a fee" and the five steps of adoption lost their boxed numbers for
    soft dots on a dotted path. A faint paper grain, drawn by the browser from an SVG noise (no
-   image file), lies on the sage bands. Every drawing is decoration: hidden from screen
-   readers, coloured by the `--ill-*` tokens so it follows light and dark mode, never needed to
-   understand a page.
+   image file), lies on the sage bands, kept light enough that no speck of it lowers any text
+   below AA. Every new drawing is decoration: hidden from screen readers, coloured by the
+   `--ill-*` tokens so it follows light and dark mode, never needed to understand a page. (The
+   home drawing, taken from the live site, keeps its short description, as it has there.)
 4. **Keep the visual structure clean**: the home page shows only the essentials (what it is,
    three doors, who pays, how the money flows in plain words, the latest news); the counters,
    the five records anyone can open and the comparison table are one click away under "Look
@@ -125,52 +129,86 @@ The operator asked for a calmer, warmer prototype, in six points. How each one i
 5. **Soften the colour palette**: away from hard code-like contrasts. Light mode keeps white
    surfaces (cream was declined earlier) with deep warm grey text (`#2f2d29` instead of
    near-black), a softer, slightly warmer green (`#3d6a47`), very light sage tints for
-   alternating sections (`#f3f6f0`), softer hairlines and 8 to 12 px corners (pills only for
-   chips and small controls). Dark mode: a deep slate-green ground (`#222c28`) instead of
-   near-black, warm off-white text (`#ebe6da`) and a muted green (`#9fc5a7`). Every text pair
-   meets WCAG AA; the measurements are below.
+   alternating sections (`#f3f6f0`), softer hairlines, 12 px corners on cards, panels and
+   accordions, 8 px on buttons and inputs, and pills only for chips. Dark mode: a deep
+   slate-green ground (`#222c28`) instead of near-black, warm off-white text (`#ebe6da`) and a
+   muted green (`#9fc5a7`). Every text pair meets WCAG AA, on the paper grain too; the
+   measurements are below.
 6. **Fluid micro-interactions**: pages of the site cross-fade instead of jumping (CSS
-   cross-document view transitions: the header stays put and the title block rises in, in
-   browsers that support them); links to a part of a page scroll smoothly; sections below the
-   first screen fade and rise a little as you reach them; menus, panels and accordions open
-   with a short fade or slide; hovers and presses take 150 to 250 ms. All of it is off when the
-   visitor asks for reduced motion. Only the script ever hides a section, and only until it is
-   reached, so with JavaScript off, or when printing, every section is simply there.
+   cross-document view transitions, in browsers that support them: the banner and the header
+   stay where they are, even when you leave a page scrolled down, and the title block rises
+   in); links to a part of a page scroll smoothly; sections below the first screen fade and
+   rise a little as you reach them; menus, panels and accordions open with a short fade or
+   slide; hovers and presses on links, buttons, chips and accordions take 150 to 250 ms. All of
+   it is off when the visitor asks for reduced motion, presses and hover nudges included. Only
+   the script ever hides a section, and only until it is reached or a keyboard user tabs into
+   it, so with JavaScript off, or when printing, every section is simply there.
 
 ### Contrast, measured
 
-WCAG 2.x contrast of every text and control pair the stylesheet uses (text needs 4.5:1, focus
-rings and control borders 3:1). Hairlines and the drawings are decorative.
+WCAG 2.x contrast of the stylesheet's text and control pairs, both themes (text needs 4.5:1, or
+3:1 when large; focus rings and control borders 3:1). Hairlines and the drawings are
+decorative. Re-measured on 2026-10-29 from the tokens at the top of `assets/site.css`, and on
+the rendered pages (every text element of all 42 pages in both themes, with every accordion,
+menu panel and highlighted answer open; lowest found: 4.69:1 light, a count on the current
+filter chip; 4.91:1 dark, the disabled "Choose coverage" button).
 
 | Text or line | on | Light | Dark | Needs | Used for |
 |---|---|---|---|---|---|
 | `ink` | `bg` | 13.74:1 (#2f2d29 on #ffffff) | 11.56:1 (#ebe6da on #222c28) | 4.5:1 | body text, headings |
-| `ink` | `tint` | 12.60:1 (#2f2d29 on #f3f6f0) | 10.79:1 (#ebe6da on #27312d) | 4.5:1 | text on sage bands and door cards |
+| `ink` | `surface` | 13.74:1 (#2f2d29 on #ffffff) | 10.52:1 (#ebe6da on #28332e) | 4.5:1 | open panels, record boxes |
+| `ink` | `tint` | 12.60:1 (#2f2d29 on #f3f6f0) | 10.79:1 (#ebe6da on #27312d) | 4.5:1 | door cards |
 | `ink` | `surface-subtle` | 12.60:1 (#2f2d29 on #f3f6f0) | 9.95:1 (#ebe6da on #2b3732) | 4.5:1 | table heads, document header |
-| `ink` | `accent-soft` | 12.17:1 (#2f2d29 on #ecf3ec) | 8.86:1 (#ebe6da on #2e4036) | 4.5:1 | notice text |
+| `ink` | `accent-soft` | 12.17:1 (#2f2d29 on #ecf3ec) | 8.86:1 (#ebe6da on #2e4036) | 4.5:1 | notice text, a hovered door |
+| `ink` | `seal-soft` | 12.10:1 (#2f2d29 on #f7f0df) | 11.46:1 (#ebe6da on #2f2a1f) | 4.5:1 | text in "Sample" notices |
 | `ink-muted` | `bg` | 7.21:1 (#5a574f on #ffffff) | 7.68:1 (#c2bdb0 on #222c28) | 4.5:1 | summaries, notes, breadcrumb |
-| `ink-muted` | `tint` | 6.61:1 (#5a574f on #f3f6f0) | 7.16:1 (#c2bdb0 on #27312d) | 4.5:1 | notes on sage bands, door labels |
+| `ink-muted` | `surface` | 7.21:1 (#5a574f on #ffffff) | 6.99:1 (#c2bdb0 on #28332e) | 4.5:1 | menu panel purpose lines |
+| `ink-muted` | `tint` | 6.61:1 (#5a574f on #f3f6f0) | 7.16:1 (#c2bdb0 on #27312d) | 4.5:1 | door labels |
 | `ink-muted` | `surface-subtle` | 6.61:1 (#5a574f on #f3f6f0) | 6.61:1 (#c2bdb0 on #2b3732) | 4.5:1 | document header, framed heads |
-| `ink-faint` | `bg` | 5.63:1 (#6b675e on #ffffff) | 5.71:1 (#a7a397 on #222c28) | 4.5:1 | metadata lines, captions, dates |
-| `ink-faint` | `tint` | 5.17:1 (#6b675e on #f3f6f0) | 5.33:1 (#a7a397 on #27312d) | 4.5:1 | captions on sage bands |
-| `ink-faint` | `surface-subtle` | 5.17:1 (#6b675e on #f3f6f0) | 4.91:1 (#a7a397 on #2b3732) | 4.5:1 | captions on table heads |
+| `ink-muted` | `accent-soft` | 6.39:1 (#5a574f on #ecf3ec) | 5.89:1 (#c2bdb0 on #2e4036) | 4.5:1 | door labels when a door is hovered |
+| `ink-faint` | `bg` | 5.63:1 (#6b675e on #ffffff) | 5.71:1 (#a7a397 on #222c28) | 4.5:1 | metadata lines, captions, dates, empty filter chips |
+| `ink-faint` | `surface` | 5.63:1 (#6b675e on #ffffff) | 5.20:1 (#a7a397 on #28332e) | 4.5:1 | faint text in panels |
+| `ink-faint` | `tint` | 5.17:1 (#6b675e on #f3f6f0) | 5.33:1 (#a7a397 on #27312d) | 4.5:1 | the flat tint (on a band, see the grain table below) |
+| `ink-faint` | `surface-subtle` | 5.17:1 (#6b675e on #f3f6f0) | 4.91:1 (#a7a397 on #2b3732) | 4.5:1 | captions on table heads, a disabled button |
 | `accent` | `bg` | 6.27:1 (#3d6a47 on #ffffff) | 7.55:1 (#9fc5a7 on #222c28) | 4.5:1 | links |
-| `accent` | `tint` | 5.74:1 (#3d6a47 on #f3f6f0) | 7.05:1 (#9fc5a7 on #27312d) | 4.5:1 | links on sage bands and cards |
+| `accent` | `surface` | 6.27:1 (#3d6a47 on #ffffff) | 6.87:1 (#9fc5a7 on #28332e) | 4.5:1 | links in menu panels |
+| `accent` | `tint` | 5.74:1 (#3d6a47 on #f3f6f0) | 7.05:1 (#9fc5a7 on #27312d) | 4.5:1 | links on door cards |
 | `accent` | `accent-soft` | 5.55:1 (#3d6a47 on #ecf3ec) | 5.79:1 (#9fc5a7 on #2e4036) | 4.5:1 | links in notices, "Registered" chip, step numbers |
 | `accent` | `surface-subtle` | 5.74:1 (#3d6a47 on #f3f6f0) | 6.50:1 (#9fc5a7 on #2b3732) | 4.5:1 | "Identifier and SHA-256" in the document header |
-| `ink-muted` | `accent-soft` | 6.39:1 (#5a574f on #ecf3ec) | 5.89:1 (#c2bdb0 on #2e4036) | 4.5:1 | door labels when a door is hovered |
 | `accent-hover` | `bg` | 7.94:1 (#2f5a3b on #ffffff) | 8.92:1 (#b5d3bc on #222c28) | 4.5:1 | links on hover |
+| `accent-hover` | `tint` | 7.27:1 (#2f5a3b on #f3f6f0) | 8.32:1 (#b5d3bc on #27312d) | 4.5:1 | links on hover on cards |
 | `accent-ink` | `accent` | 6.27:1 (#ffffff on #3d6a47) | 8.16:1 (#1c2622 on #9fc5a7) | 4.5:1 | the button, pressed theme switch, current filter |
 | `accent-ink` | `accent-hover` | 7.94:1 (#ffffff on #2f5a3b) | 9.64:1 (#1c2622 on #b5d3bc) | 4.5:1 | the button on hover |
 | `seal` | `seal-soft` | 5.60:1 (#7a5a17 on #f7f0df) | 8.12:1 (#dcc08a on #2f2a1f) | 4.5:1 | prototype banner, "Sample" chips, "Why this page" |
 | `seal` | `bg` | 6.36:1 (#7a5a17 on #ffffff) | 8.19:1 (#dcc08a on #222c28) | 4.5:1 | placeholders, Verify seal |
+| `seal` | `surface` | 6.36:1 (#7a5a17 on #ffffff) | 7.45:1 (#dcc08a on #28332e) | 4.5:1 | headings in the "Why this page" panel |
 | `bg` | `seal` | 6.36:1 (#ffffff on #7a5a17) | 8.19:1 (#222c28 on #dcc08a) | 4.5:1 | "Why this page" when open |
 | `warn` | `bg` | 7.26:1 (#7a4d06 on #ffffff) | 7.64:1 (#e0b769 on #222c28) | 4.5:1 | status |
 | `bad` | `bg` | 9.14:1 (#8a1f1f on #ffffff) | 6.50:1 (#e79a9a on #222c28) | 4.5:1 | status |
+| count at 80% | the chosen chip (`accent`) | 4.69:1 | 5.25:1 | 4.5:1 | filter count on the chosen chip |
+| count at 80% | a plain chip (`bg`) | 7.20:1 | 7.97:1 | 4.5:1 | filter counts (an empty chip keeps its count at full strength) |
 | `focus` | `bg` | 8.38:1 (#0f4f8a on #ffffff) | 7.63:1 (#8ec2f0 on #222c28) | 3:1 | focus ring |
+| `focus` | `tint` | 7.68:1 (#0f4f8a on #f3f6f0) | 7.12:1 (#8ec2f0 on #27312d) | 3:1 | focus ring on cards and bands |
 | `control-border` | `bg` | 3.79:1 (#878378 on #ffffff) | 4.11:1 (#808c84 on #222c28) | 3:1 | inputs, chips, outline buttons |
+| `control-border` | `surface` | 3.79:1 (#878378 on #ffffff) | 3.74:1 (#808c84 on #28332e) | 3:1 | the search field |
 | `control-border` | `tint` | 3.47:1 (#878378 on #f3f6f0) | 3.84:1 (#808c84 on #27312d) | 3:1 | controls on sage bands |
 | `control-border` | `surface-subtle` | 3.47:1 (#878378 on #f3f6f0) | 3.54:1 (#808c84 on #2b3732) | 3:1 | disabled input on the subtle ground |
+
+**The sage bands carry the paper grain**, so text there sits on a speckled ground, not on the
+flat tint. Measured pixel by pixel on the rendered band (at 1x and 2x), the lowest contrast
+any single speck gives each text colour:
+
+| Text on a band | Light | Dark | Needs |
+|---|---|---|---|
+| `ink` | 11.11:1 | 9.14:1 | 4.5:1 |
+| `ink-muted` | 5.83:1 | 6.07:1 | 4.5:1 |
+| `accent` (links) | 5.07:1 | 5.97:1 | 4.5:1 |
+| `ink-faint` (captions, section references) | 4.56:1 | 4.52:1 | 4.5:1 |
+
+A stronger grain fails: at the strength first tried (twice this in light mode, more than twice
+in dark) the faint captions fell to 4.04:1 (light) and 3.74:1 (dark) on single specks at 1x,
+lower still at 2x, and below 4.5:1 on more than one speck in twenty. One pair is left unused on
+purpose: faint text on a notice would be 4.38:1 in dark mode, so notices hold no faint text.
 
 ## The rules this prototype keeps
 
@@ -189,6 +227,10 @@ change things.
 - Two type families: Source Serif 4 for headings and running text, Inter for interface text.
   One H1 size on every page except the home page.
 - A 64 px header; the title block stays compact.
+- Corners: 12 px on cards, panels and accordions, 8 px on buttons and inputs; pills only for
+  chips.
+- Every text pair at least 4.5:1 (3:1 for large text, focus rings and control borders), on the
+  paper grain too: measure after changing a colour or the grain.
 - Technical detail one click away in an accordion; never removed.
 - Drawings, never photographs; they decorate and never carry information.
 - Motion stays gentle, never starts by itself, and is off with reduced motion.
