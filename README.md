@@ -28,7 +28,7 @@ No build step, no framework, no package to install, nothing loaded from other we
 ## How the files are organised
 
 ```
-index.html, license.html, …   one file per page (41 pages)
+index.html, license.html, …   one file per page (42 pages)
 404.html                      the not-found page (the host serves it for missing addresses)
 assets/site.css               the only stylesheet; design tokens at the top, motion at the end
 assets/layout.js              the header menu and the footer, defined once; theme switch;
@@ -37,11 +37,13 @@ assets/layout.js              the header menu and the footer, defined once; them
 assets/registry.js            search, filters and sorting on registry.html only
 assets/fonts/                 Source Serif 4 and Inter (woff2) and their OFL licences
 assets/brand/                 the Purpose Source mark (light and dark) and the favicon
+assets/photos/                the photographs (WebP, two widths each); sources in credits.html
 robots.txt, .nojekyll         keep crawlers out; tell GitHub Pages to serve files as they are
 ```
 
 The drawings are inline `<svg>` in the pages that show them (no image files), so they can use
-the colour tokens and follow light and dark mode.
+the colour tokens and follow light and dark mode. The photographs are WebP files in
+`assets/photos` (see **Photographs**).
 
 **File names follow the real site's addresses**, with slashes turned into dashes:
 `/for/companies/check` is `for-companies-check.html`, `/trust/money` is `trust-money.html`,
@@ -77,6 +79,7 @@ are brief stand-ins.
 - **A sage band behind a section:** add `band` to its `class` (`<section class="sec band">`).
 - **A short link with an icon, followed by punctuation** (`(Art. 5↗).`): put the link and the
   punctuation in `<span class="nobr">…</span>`, or a line may start with `).` on its own.
+- **A photograph:** see **Photographs** below.
 
 ### Adding a page
 
@@ -90,6 +93,41 @@ are brief stand-ins.
 
 The `<noscript>` blocks in each page are the fallback when JavaScript is off: a short list of
 the six sections and the legal links. They rarely need changing.
+
+## Photographs
+
+Six pages show a photograph: the home page (a wide one, between the title and the three
+doors), About, Adopt in five steps, Propose it to your project, For companies and Public
+records. `credits.html` ("Photo credits" in every footer) lists each one with its author,
+source page, licence and what we changed.
+
+- **Where they come from:** Wikimedia Commons. Four are CC0 photographs first published on
+  Unsplash when Unsplash used CC0; two are CC BY 4.0 (the home page's and About's), so the
+  credits page names their authors and the licence.
+- **Licences allowed:** CC0 or public domain, CC BY (any version), the Unsplash License, the
+  Pexels License. Never NC or ND. CC BY-SA only if nothing else fits, and then the credits say
+  that the cropped copy is shared under the same licence.
+- **What a photograph may show:** calm, natural light, warm or neutral tones; backs, hands or
+  a group at a distance rather than an identifiable face; no brand logo (on the home photograph
+  the event's name and logos on a projected slide are blurred); nothing that suggests a named
+  person speaks for Purpose Source; no stock clichés. Never text over a photograph.
+- **The files:** `assets/photos/<name>-<width>.webp`, two widths each: 1600 and 800 px for the
+  home photograph (2:1; from 761 px wide it shows at 12:5, a little trimmed top and bottom),
+  1000 and 500 px for the others (4:3). WebP at quality 78, colours in sRGB, every bit of
+  metadata removed (EXIF, GPS, XMP, colour profiles). The folder holds about 0.6 MB; keep it
+  under about 1.6 MB.
+- **The markup:** each `<img>` has `src`, `srcset`, `sizes`, `width` and `height` (so nothing
+  moves while it loads), a real `alt` text that says what it shows, `loading="lazy"` and
+  `decoding="async"`; only the home photograph loads at once (`loading="eager"`,
+  `fetchpriority="high"`). Beside a title it sits in `<header class="title-block has-photo">`.
+  The photo credits page shows small copies (the smaller file only) with `alt=""`, since the
+  text beside them names each one.
+- **The look:** 12 px corners, a faint inner edge (`--photo-edge`) so a pale photograph does
+  not melt into the white page, and in dark mode `--photo-filter` dims them a little so they
+  do not glare.
+- **Swapping one:** crop the new photograph to the same aspect, write both widths under the
+  same names (or change `src`, `srcset`, `width` and `height` in the page), write a new `alt`
+  text, and replace its entry in `credits.html`, with what you changed.
 
 ## Design direction (2026-10-29)
 
@@ -107,18 +145,25 @@ The operator asked for a calmer, warmer prototype, in six points. How each one i
    its font file and licence; identifiers and hashes are set in Inter with tabular figures and
    a little letter-spacing (the class `ident`). (No slashed zero: the Inter files here do not
    carry that feature.)
-3. **Humanise the images**: no photographs (we have none of our own, and stock photos of
-   strangers would not be us). Instead, hand-drawn-style drawings in the manner of the live
-   site's home drawing (a soft wash, the green line, leaf and clay fills, faces as plain
-   circles): a maintainer at a laptop, a small office, two hands holding a seedling, an open
-   book for the licence, a ledger book, people at work together. They replace the numbered
-   step boxes of "How the money flows" on the home page and sit beside the title blocks of the
-   main pages; "The path of a fee" and the five steps of adoption lost their boxed numbers for
-   soft dots on a dotted path. A faint paper grain, drawn by the browser from an SVG noise (no
-   image file), lies on the sage bands, kept light enough that no speck of it lowers any text
-   below AA. Every new drawing is decoration: hidden from screen readers, coloured by the
-   `--ill-*` tokens so it follows light and dark mode, never needed to understand a page. (The
-   home drawing, taken from the live site, keeps its short description, as it has there.)
+3. **Humanise the images**: a mix of real photographs and hand-drawn-style drawings. Asked
+   whether to use our own photographs, freely licensed ones or none, the operator chose freely
+   licensed ones, each with its source listed. Six real scenes now stand where a drawing only
+   decorated: a wide photograph of people gathered in a library opens the home page (on phones
+   too) in place of the live site's home drawing; Aarau's old town beside the title of About;
+   hands at a laptop on Adopt in five steps; people side by side at one table on Propose it to
+   your project; someone at work in an office, seen through glass and plants, on For
+   companies; archive shelves on Public records. Each has a real alt text; see **Photographs**
+   above. The drawings, in the manner of the live site's home drawing (a soft wash, the green
+   line, leaf and clay fills, faces as plain circles), stay where a picture explains: the three
+   scenes of "How the money flows" on the home page instead of numbered step boxes, the
+   drawing beside each of the first three sections of How it works, and beside the titles of
+   the licence (an open book), Adopt the licence (a maintainer at a laptop), Causes and Where
+   the money goes (two hands holding a seedling) and the public ledger (a ledger book); "The
+   path of a fee" and the five steps of adoption lost their boxed numbers for soft dots on a
+   dotted path. A faint paper grain, drawn by the browser from an SVG noise (no image file),
+   lies on the sage bands, kept light enough that no speck of it lowers any text below AA.
+   Every drawing is decoration: hidden from screen readers, coloured by the `--ill-*` tokens
+   so it follows light and dark mode, never needed to understand a page.
 4. **Keep the visual structure clean**: the home page shows only the essentials (what it is,
    three doors, who pays, how the money flows in plain words, the latest news); the counters,
    the five records anyone can open and the comparison table are one click away under "Look
@@ -150,10 +195,11 @@ The operator asked for a calmer, warmer prototype, in six points. How each one i
 
 WCAG 2.x contrast of the stylesheet's text and control pairs, both themes (text needs 4.5:1, or
 3:1 when large; focus rings and control borders 3:1). Hairlines and the drawings are
-decorative. Re-measured on 2026-10-29 from the tokens at the top of `assets/site.css`, and on
-the rendered pages (every text element of all 42 pages in both themes, with every accordion,
-menu panel and highlighted answer open; lowest found: 4.69:1 light, a count on the current
-filter chip; 4.91:1 dark, the disabled "Choose coverage" button).
+decorative, and no text sits on a photograph. Re-measured on 2026-10-29 from the tokens at the
+top of `assets/site.css`, and on the rendered pages (every text element of all 42 pages in both
+themes, with every accordion, menu panel and highlighted answer open; lowest found: 4.69:1
+light, a count on the current filter chip; 4.91:1 dark, the disabled "Choose coverage" button).
+The photo credits page, added after that measurement, uses only pairs listed below.
 
 | Text or line | on | Light | Dark | Needs | Used for |
 |---|---|---|---|---|---|
@@ -234,7 +280,9 @@ change things.
 - Every text pair at least 4.5:1 (3:1 for large text, focus rings and control borders), on the
   paper grain too: measure after changing a colour or the grain.
 - Technical detail one click away in an accordion; never removed.
-- Drawings, never photographs; they decorate and never carry information.
+- Photographs only where a real scene helps more than a drawing: freely licensed, listed in
+  `credits.html`, with a real alt text, never with text over them, never a stock cliché.
+  Drawings where a picture explains; they decorate and never carry information.
 - Motion stays gentle, never starts by itself, and is off with reduced motion.
 
 **Words**
@@ -276,6 +324,7 @@ change things.
 - The theme switch at the bottom of every page remembers your choice in your browser only
   (local storage); nothing else is stored.
 - Licences: the fonts are under the SIL Open Font License (texts in `assets/fonts`). The
-  Purpose Source name and mark follow the brand rules on the live site
+  photographs are under CC0 1.0 or CC BY 4.0; `credits.html` names each one's author, source,
+  licence and changes. The Purpose Source name and mark follow the brand rules on the live site
   (https://purposesource.org/brand). No licence has been chosen for this prototype's own code
   and text yet; the live website uses Apache-2.0 for code and CC BY-ND 4.0 for narrative pages.
