@@ -10,15 +10,15 @@
  *    proposed design: delete these two blocks and the site has no prototype chrome.
  * 5. Site chrome (header, menu panels, phone menu, breadcrumb, title block, footer).
  * 6. Components (links with icons, button, copy icon, notice, facts, chips, tables,
- *    accordions, illustrations, sage bands...).
+ *    accordions, illustrations, photographs, sage bands...).
  * 7. Page-specific blocks (home, licence, registry, checker, ledger).
  * 8. Motion (page transitions, sections that rise into view, menu and accordion openings).
  *    Everything in it is switched off when the visitor asks for reduced motion.
  *
  * Source of the values: STUDY.md section 7, softened on 2026-10-29 by the design direction in
- * README.md ("Design direction": more room, two warm type families, drawings instead of
- * diagrams, details behind accordions, a softer palette, gentle motion). Contrast pairs are
- * listed in README.md.
+ * README.md ("Design direction": more room, two warm type families, drawings and licensed
+ * photographs instead of diagrams, details behind accordions, a softer palette, gentle motion).
+ * Contrast pairs are listed in README.md.
  */
 
 /* ------------------------------------------------------------------ 1. Tokens */
@@ -51,7 +51,7 @@
   --focus-halo:     light-dark(#cfe3f5, #24405c);
   --shadow:         light-dark(rgb(47 45 41 / 14%), rgb(0 0 0 / 38%));
 
-  /* The drawings (our own artwork; the home drawing comes from the live site). */
+  /* The drawings (our own artwork, in the manner of the live site's home drawing). */
   --ill-wash:       light-dark(#eef2e8, #2b3833);
   --ill-leaf:       light-dark(#a7b89a, #6b8568);
   --ill-leaf-light: light-dark(#dbe3cd, #3d5243);
@@ -59,6 +59,12 @@
   --ill-clay-light: light-dark(#f1dfd0, #574436);
   --ill-line:       light-dark(#d3cec0, #4d5b54);
   --ill-ink:        light-dark(#3d6a47, #a9c9b0);
+
+  /* Photographs (assets/photos; sources and licences in credits.html). A faint inner edge keeps a
+     pale photograph from melting into the white page; in dark mode --photo-filter (below) dims
+     them a little so they do not glare on the slate-green ground. */
+  --photo-edge:     light-dark(rgb(47 45 41 / 10%), rgb(235 230 218 / 12%));
+  --photo-filter:   none;
 
   /* Paper grain for the sage bands: a gentle noise drawn by the browser (no image file). Its
      strength is set so that no speck of it takes any text on a band below 4.5:1 (measured
@@ -104,13 +110,16 @@
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] { color-scheme: dark; }
 
-/* Non-colour values that differ in dark mode (the grain is lighter there). */
+/* Non-colour values that differ in dark mode (the grain is lighter there; photographs are a
+   little dimmer). */
 :root[data-theme="dark"] {
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .93 0 0 0 0 .86 1.6 0 0 0 -.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E");
+  --photo-filter: brightness(0.88) saturate(0.92);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .93 0 0 0 0 .86 1.6 0 0 0 -.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E");
+    --photo-filter: brightness(0.88) saturate(0.92);
   }
 }
 
@@ -606,6 +615,20 @@ strong { font-weight: 600; }
 }
 @media (max-width: 560px) {
   .title-ill { max-width: 210px; }
+}
+
+/* A title block with a photograph beside it. The photograph shows a real scene and says so in
+   its alt text. Below 1000 px it moves under the title, at most 560 px wide. */
+.title-block.has-photo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 400px);
+  column-gap: 56px;
+  align-items: center;
+}
+.title-photo { justify-self: end; width: 100%; }
+@media (max-width: 999px) {
+  .title-block.has-photo { grid-template-columns: minmax(0, 1fr); }
+  .title-photo { justify-self: start; max-width: 560px; margin-top: 28px; }
 }
 
 /* Document header: only for the licence and certificates (a 1px framed box on the subtle ground). */
@@ -1219,16 +1242,26 @@ details.more > div > :last-child { margin-bottom: 0; }
   .sec-ill > .ill { max-width: 230px; margin: 0 0 20px; }
 }
 
+/* Photographs: real scenes where one helps more than a drawing, in two widths each (srcset).
+   Width and height reserve the space, so nothing moves while they load. Soft corners, a faint
+   inner edge, a little dimmer in dark mode; never text over a photograph. Sources, authors and
+   licences: credits.html. */
+.photo { margin: 0; }
+.photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  background: var(--surface-subtle);
+  outline: 1px solid var(--photo-edge);
+  outline-offset: -1px;
+  filter: var(--photo-filter);
+}
+
 /* ------------------------------------------------------------------ 7. Page-specific */
 
 /* Home. */
-.home-title {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: 64px;
-  align-items: center;
-  padding: 56px 0 0;
-}
+.home-title { padding: 56px 0 0; }
 .home-title h1 {
   margin: 0 0 22px;
   font-size: var(--fs-display);
@@ -1237,8 +1270,15 @@ details.more > div > :last-child { margin-bottom: 0; }
 }
 .home-title h1 em { font-style: italic; }
 .home-verdict { margin: 0 0 18px; max-width: 32em; color: var(--ink-muted); font-size: var(--fs-summary); line-height: 1.55; }
-.home-illustration { justify-self: end; width: 100%; max-width: 380px; }
-.home-illustration svg { display: block; width: 100%; height: auto; }
+
+/* The opening photograph: wide, between the title and the three doors, on phones too. The file
+   is 2:1; from 761 px it shows at 12:5 (a little trimmed top and bottom) so the doors stay
+   close. It is in the first screen, so the page loads it at once. */
+.home-photo { margin: 40px 0 0; }
+.home-photo img { aspect-ratio: 2 / 1; object-fit: cover; object-position: 50% 55%; }
+@media (min-width: 761px) {
+  .home-photo img { aspect-ratio: 12 / 5; }
+}
 
 /* Three doors: who you are, and where to start. The whole card is the link's target. */
 .doors {
@@ -1287,10 +1327,6 @@ details.more > div > :last-child { margin-bottom: 0; }
 .flow .areas-line { font-size: 16px; color: var(--ink-muted); }
 .flow-n { display: block; margin-bottom: 4px; font: 500 var(--fs-small)/1.4 var(--font-sans); color: var(--ink-faint); }
 
-@media (max-width: 999px) {
-  .home-title { grid-template-columns: minmax(0, 1fr); }
-  .home-illustration { display: none; }
-}
 @media (max-width: 760px) {
   .doors, .who-pays, .flow, .content .flow { grid-template-columns: minmax(0, 1fr); }
   .doors { gap: 12px; margin-top: 36px; }
