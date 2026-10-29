@@ -29,18 +29,18 @@
 
   /* Colour. light-dark(light value, dark value). Light: white surfaces, warm grey text, a soft
      green. Dark: a deep slate-green ground, warm off-white text, muted green. */
-  --bg:             light-dark(#ffffff, #1d2623);  /* page ground */
-  --surface:        light-dark(#ffffff, #232e29);  /* open panels, inputs, record boxes */
-  --surface-subtle: light-dark(#f3f6f0, #25302b);  /* table heads, code, document header */
-  --tint:           light-dark(#f3f6f0, #212b27);  /* sage bands behind alternating sections */
+  --bg:             light-dark(#ffffff, #222c28);  /* page ground */
+  --surface:        light-dark(#ffffff, #28332e);  /* open panels, inputs, record boxes */
+  --surface-subtle: light-dark(#f3f6f0, #2b3732);  /* table heads, code, document header */
+  --tint:           light-dark(#f3f6f0, #27312d);  /* sage bands behind alternating sections */
   --ink:            light-dark(#2f2d29, #ebe6da);  /* body text and headings */
   --ink-muted:      light-dark(#5a574f, #c2bdb0);  /* summaries, secondary text */
   --ink-faint:      light-dark(#6b675e, #a7a397);  /* metadata lines, captions */
   --accent:         light-dark(#3d6a47, #9fc5a7);  /* links, the one button, current item */
   --accent-hover:   light-dark(#2f5a3b, #b5d3bc);
-  --accent-ink:     light-dark(#ffffff, #1a2420);  /* text on the accent */
-  --accent-soft:    light-dark(#ecf3ec, #283a31);  /* notice boxes, step dots */
-  --rule:           light-dark(#e5e8e1, #34413b);  /* hairlines (decorative) */
+  --accent-ink:     light-dark(#ffffff, #1c2622);  /* text on the accent */
+  --accent-soft:    light-dark(#ecf3ec, #2e4036);  /* notice boxes, step dots */
+  --rule:           light-dark(#e5e8e1, #3b4943);  /* hairlines (decorative) */
   --control-border: light-dark(#878378, #808c84);  /* inputs, chips, outline button: 3:1 */
   --seal:           light-dark(#7a5a17, #dcc08a);  /* verification and "Sample" only */
   --seal-soft:      light-dark(#f7f0df, #2f2a1f);
@@ -52,7 +52,7 @@
   --shadow:         light-dark(rgb(47 45 41 / 14%), rgb(0 0 0 / 38%));
 
   /* The drawings (our own artwork; the home drawing comes from the live site). */
-  --ill-wash:       light-dark(#eef2e8, #27332e);
+  --ill-wash:       light-dark(#eef2e8, #2b3833);
   --ill-leaf:       light-dark(#a7b89a, #6b8568);
   --ill-leaf-light: light-dark(#dbe3cd, #3d5243);
   --ill-clay:       light-dark(#c48c67, #c99876);
