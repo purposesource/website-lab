@@ -213,12 +213,11 @@
       ['Entitlement terms', LIVE + '/legal/entitlement-terms'],
       ['Licence', 'license.html'],
       ['Name, logos and badges', 'brand.html'],
-      ['Photo credits', 'credits.html'],
       ['All pages', 'learn.html']
     ],
     lines: [
       'The Purpose Source License is source-available; it is not OSI-approved.',
-      'No cookies while you browse. No analytics. Code Apache-2.0; narrative pages CC BY-ND 4.0; photographs under their own licences (Photo credits).'
+      'No cookies while you browse. No analytics. Code Apache-2.0; narrative pages CC BY-ND 4.0.'
     ]
   };
 
