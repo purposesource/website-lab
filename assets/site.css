@@ -11,7 +11,7 @@
  * 5. Site chrome (header, menu panels, phone menu, breadcrumb, title block, footer).
  * 6. Components (links with icons, button, copy icon, notice, facts, chips, tables,
  *    accordions, illustrations, photographs, sage bands...).
- * 7. Page-specific blocks (home, licence, registry, checker, ledger).
+ * 7. Page-specific blocks (home, licence, registry, checker, ledger, photo credits).
  * 8. Motion (page transitions, sections that rise into view, menu and accordion openings).
  *    Everything in it is switched off when the visitor asks for reduced motion.
  *
@@ -1489,6 +1489,26 @@ details.more > div > :last-child { margin-bottom: 0; }
 
 /* The 404 page. */
 .nf-suggest { margin-top: var(--s5); }
+
+/* Photo credits: each photograph, small and in its own proportions, beside its source, author,
+   licence and what was changed. */
+.credits { list-style: none; margin: var(--s5) 0 0; padding: 0; }
+.content .credits { max-width: 880px; }
+.credit {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 8px 36px;
+  margin: 0;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+}
+.credit h3 { margin: 0 0 10px; }
+.credit .facts { margin: 0; }
+.facts--compact > div { padding: 8px 0; }
+@media (max-width: 700px) {
+  .credit { grid-template-columns: minmax(0, 1fr); padding: 24px 0; }
+  .credit-photo { max-width: 260px; margin-bottom: 8px; }
+}
 
 /* ------------------------------------------------------------------ 8. Motion */
 

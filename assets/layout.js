@@ -213,6 +213,7 @@
       ['Entitlement terms', LIVE + '/legal/entitlement-terms'],
       ['Licence', 'license.html'],
       ['Name, logos and badges', 'brand.html'],
+      ['Photo credits', 'credits.html'],
       ['All pages', 'learn.html']
     ],
     lines: [
